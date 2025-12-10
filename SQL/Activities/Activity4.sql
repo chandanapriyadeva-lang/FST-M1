@@ -1,0 +1,3 @@
+ALTER TABLE SALESMAN2 ADD grade int;
+UPDATE SALESMAN2 SET grade = 100;
+SELECT * FROM salesman;
