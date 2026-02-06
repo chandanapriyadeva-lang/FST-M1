@@ -1,0 +1,34 @@
+Step 1: To get started, make a new REST Project.
+
+In the dialog box, you can add multiple APIs at once. Simply click on Add URL and add all the API URL that need to be tested. For this activity, paste the following URIs
+
+To create a user: [POST operation] https://petstore.swagger.io/v2/user.
+To login: [GET operation] https://petstore.swagger.io/v2/user/login?username={username}&password={password}
+To get user information: [GET operation] https://petstore.swagger.io/v2/user/{username}
+To logout: [GET operation] https://petstore.swagger.io/v2/user/logout
+To delete a user: [DELETE operation] https://petstore.swagger.io/v2/user/{username}
+This is what is looks like:
+
+Follow the rest of the setup process as usual. Add all the test steps in a single test case.
+
+Once it is created, you will see your project:
+Step 2: Run the POST request test step with the following body.
+{
+    "id": 1,
+    "username": "testuser",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@doe.com",
+    "password": "testuser",
+    "phone": "234567890",
+    "userStatus": 0
+}
+Run the test step. If the status code is 200, then the request was successfully executed.
+Step 3: To login using the newly created credentials, run the login request test step with the username and password created in the POST request step.
+
+The credentials will need to be entered in the request parameters:
+Step 4: To GET user information, run the GET request and observe the response.
+Step 5: To Logout, run the logout request test step. This step requires no parameters, so just run the test step and observe the response.
+
+Step 6: To delete the user, run the delete test step with the username of the user as the request parameter:
+You can see the response in the Response window. If the status code is 200, it means that the user was successfully deleted.
