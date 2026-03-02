@@ -1,43 +1,45 @@
-//Correct Credentials
-@Test
-public void loginValidTest() {
+package Project;
 
-    driver.get("https://training-support.net/webelements");
-    driver.findElement(By.xpath("//android.view.View[@text='Login Form']")).click();
+import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-    driver.findElement(By.id("username")).sendKeys("admin");
-    driver.findElement(By.id("password")).sendKeys("password");
-    driver.findElement(By.id("submitButton")).click();
+import io.appium.java_client.android.AndroidDriver;
 
-    String message = driver.findElement(By.id("successMessage")).getText();
-    Assert.assertTrue(message.contains("Welcome"));
+public class Activity5 {
+
+	 AndroidDriver driver;
+	@Test
+	public void testValidLogin() {
+
+	    driver.get("https://training-support.net/webelements");
+	    driver.findElement(By.xpath("//h2[text()='Login Form']")).click();
+
+	    driver.findElement(By.id("username")).sendKeys("admin");
+	    driver.findElement(By.id("password")).sendKeys("password");
+
+	    driver.findElement(By.xpath("//button[text()='Submit']")).click();
+
+	    String successMessage = driver.findElement(By.id("action-confirmation")).getText();
+
+	    Assert.assertEquals(successMessage, "Login Success!");
+	}
+
+	@Test
+	public void testInvalidLogin() {
+
+	    driver.get("https://training-support.net/webelements");
+	    driver.findElement(By.xpath("//h2[text()='Login Form']")).click();
+
+	    driver.findElement(By.id("username")).sendKeys("admin");
+	    driver.findElement(By.id("password")).sendKeys("wrongpassword");
+
+	    driver.findElement(By.xpath("//button[text()='Submit']")).click();
+
+	    String failureMessage = driver.findElement(By.id("action-confirmation")).getText();
+
+	    Assert.assertEquals(failureMessage, "Invalid Credentials");
+	}
+
+	
 }
-//Incorrect Credentials
-@Test
-public void loginInvalidTest() {
-
-    driver.findElement(By.id("username")).sendKeys("admin");
-    driver.findElement(By.id("password")).sendKeys("wrongpass");
-    driver.findElement(By.id("submitButton")).click();
-
-    String message = driver.findElement(By.id("errorMessage")).getText();
-    Assert.assertTrue(message.contains("Invalid"));
-}
-//popup Login
-@Test
-public void popupLoginTest() {
-
-    driver.get("https://training-support.net/webelements");
-    driver.findElement(By.xpath("//android.view.View[@text='Popups']")).click();
-
-    driver.findElement(By.id("openPopup")).click();
-
-    driver.findElement(By.id("popupUsername")).sendKeys("admin");
-    driver.findElement(By.id("popupPassword")).sendKeys("password");
-    driver.findElement(By.id("popupSubmit")).click();
-
-    String message = driver.findElement(By.id("popupSuccess")).getText();
-    Assert.assertTrue(message.contains("Success"));
-}
-
-
